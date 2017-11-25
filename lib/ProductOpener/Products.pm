@@ -1380,8 +1380,7 @@ sub log_change {
 sub compute_changes_diff_text {
 
 	my $change_ref = shift;
-use Data::Dumper;
-print STDERR Dumper($change_ref);
+	
 	my $diffs = '';
 	if (defined $change_ref->{diffs}) {
 		my %diffs = %{$change_ref->{diffs}};

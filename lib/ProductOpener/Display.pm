@@ -7581,8 +7581,6 @@ sub display_recent_changes {
 		# Display diffs
 		# [Image upload - add: 1, 2 - delete 2], [Image selection - add: front], [Nutriments... ]
 		
-use Data::Dumper;
-print STDERR Dumper($change_ref);
 		my $diffs = compute_changes_diff_text($change_ref);
 		$change_hash->{diffs_text} = $diffs;
 		
