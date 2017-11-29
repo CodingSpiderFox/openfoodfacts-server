@@ -5,8 +5,10 @@ lib/ProductOpener/SiteLang.pm
 
 .DS_Store
 
-html/bower_components
 node_modules
 
+html/bower_components
 html/css/dist
 html/js/dist
+
+data/mongodb
