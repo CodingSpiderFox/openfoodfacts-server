@@ -1399,9 +1399,13 @@ HTML
 \$('#no_nutrition_data').change(function() {
 	if (\$(this).prop('checked')) {
 		\$('#nutrition_data_table input').prop('disabled', true);
-		\$('#nutrition_data_table input.nutriment_value').attr('value', '');
+		\$('#nutrition_data_table select').prop('disabled', true);
+		\$('#nutrition_data_table input.nutriment_value').val('');
+		\$('#nutrition_data_table').hide();
 	} else {
 		\$('#nutrition_data_table input').prop('disabled', false);
+		\$('#nutrition_data_table select').prop('disabled', false);
+		\$('#nutrition_data_table').show();
 	}
 });
 JS
