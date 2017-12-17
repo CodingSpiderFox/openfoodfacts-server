@@ -151,6 +151,11 @@ else {
 	
 	$product_ref->{no_nutrition_data} = remove_tags_and_quote(decode utf8=>param("no_nutrition_data"));	
 	
+	my $no_nutrition_data = 0;
+	if ((defined $product_ref->{no_nutrition_data}) and ($product_ref->{no_nutrition_data} eq 'on')) {
+		$no_nutrition_data = 1;
+	}
+
 	defined $product_ref->{nutriments} or $product_ref->{nutriments} = {};
 
 	my @unknown_nutriments = ();
@@ -176,6 +181,7 @@ else {
 		$nid =~ s/-$//g;		
 		
 		next if $nid =~ /^nutrition-score/;
+		next if $no_nutrition_data and (not $nid eq 'carbon-footprint');
 
 		my $enid = encodeURIComponent($nid);
 		
