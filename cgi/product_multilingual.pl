@@ -754,10 +754,16 @@ CSS
 
 	my $label_new_code = $Lang{new_code}{$lang};
 	
-	$html .= <<HTML
+	# 26/01/2017 - disallow barcode changes until we fix bug #677
+	if ($admin) {
+		$html .= <<HTML
 <label for="new_code" id="label_new_code">${label_new_code}</label>
-<input type="text" name="new_code" id="new_code" class="text" value="" />			
+<input type="text" name="new_code" id="new_code" class="text" value="" />
+HTML
+;
+	}
 
+	$html .= <<HTML
 <div data-alert class="alert-box info store-state" id="warning_3rd_party_content" style="display:none;">
 <span>$Lang{warning_3rd_party_content}{$lang}
  <a href="#" class="close">&times;</a>
@@ -1387,6 +1393,18 @@ $html .= "</div><!-- fieldset -->
 <input type="checkbox" id="no_nutrition_data" name="no_nutrition_data" $checked />	
 <label for="no_nutrition_data" class="checkbox_label">$Lang{no_nutrition_data}{$lang}</label><br/>
 HTML
+;
+
+	$initjs .= <<JS
+\$('#no_nutrition_data').change(function() {
+	if (\$(this).prop('checked')) {
+		\$('#nutrition_data_table input').prop('disabled', true);
+		\$('#nutrition_data_table input.nutriment_value').attr('value', '');
+	} else {
+		\$('#nutrition_data_table input').prop('disabled', false);
+	}
+});
+JS
 ;
 
 	$html .= display_tabs($product_ref, $select_add_language, "nutrition_image", $product_ref->{sorted_langs}, \%Langs, ["nutrition_image"]);
