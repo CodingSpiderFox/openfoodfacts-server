@@ -1563,6 +1563,13 @@ HTML
 		
 		# print STDERR "nutriment: $nutriment - nid: $nid - shown: $shown - class: $class - prefix: $prefix \n";
 		
+		my $disabled_backup = $disabled;
+		if ($nid eq 'carbon-footprint') {
+			# Workaround, so that the carbon footprint, that could be in a location different from actual nutrition facts,
+			# will never be disabled.
+			$disabled = '';
+		}
+		
 		my $input = '';
 		
 		
@@ -1610,13 +1617,6 @@ HTML
 		}
 		else {
 			$hide_percent = ' style="display:none"';
-		}
-		
-		my $disabled_backup = $disabled;
-		if ($nid eq 'carbon-footprint') {
-			# Workaround, so that the carbon footprint, that could be in a location different from actual nutrition facts,
-			# will never be disabled.
-			$disabled = '';
 		}
 
 		$input .= <<HTML
