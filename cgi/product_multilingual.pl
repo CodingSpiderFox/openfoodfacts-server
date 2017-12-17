@@ -1612,12 +1612,20 @@ HTML
 			$hide_percent = ' style="display:none"';
 		}
 		
+		my $disabled_backup = $disabled;
+		if ($nid eq 'carbon-footprint') {
+			# Workaround, so that the carbon footprint, that could be in a location different from actual nutrition facts,
+			# will never be disabled.
+			$disabled = '';
+		}
+
 		$input .= <<HTML
 <span class="nutriment_unit_percent" id="nutriment_${enid}_unit_percent"$hide_percent>%</span>
 <select class="nutriment_unit" id="nutriment_${enid}_unit" name="nutriment_${enid}_unit"$hide_select $disabled>
 HTML
 ;		
-		
+		$disabled = $disabled_backup;
+
 		foreach my $u (@units) {
 			my $selected = '';
 			if ($unit eq $u) {
